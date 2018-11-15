@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BallingOutMobile.ProfilePage"
+             xmlns:charts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             Title="Profile">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Your profile is here!"/>
+                <Label Text="Speed chart"/>
+                <charts:ChartView x:Name="SpeedChart" HeightRequest="150"/>
+                <Label Text="Accuracy chart"/>
+                <charts:ChartView x:Name="AccuracyChart" HeightRequest="150"/>
+                <Label Text="Repeatitions per sec chart"/>
+                <charts:ChartView x:Name="RepeatitionsChart" HeightRequest="150"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:BallingOutMobile"
+            x:Class="BallingOutMobile.MainMenuPage">
+    <TabbedPage.Children>
+        <local:ProfilePage/>
+        <NavigationPage Title="Practice">
+            <x:Arguments>
+                <local:PracticePage/>
+            </x:Arguments>
+        </NavigationPage>
+    </TabbedPage.Children>
+</TabbedPage>

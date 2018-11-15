@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BallingOutMobile.SignUpPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label 
+                Text="Enter your name:" 
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" />
+            <Entry 
+                x:Name="nameEntry" />
+            <Label 
+                Text="Enter your email:" 
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" />
+            <Entry 
+                x:Name="emailEntry" />
+            <Label 
+                Text="Enter your password:" 
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" />
+            <Entry 
+                x:Name="passwordEntry" 
+                IsPassword="True" />
+            <Label 
+                Text="Confirm your password:" 
+                HorizontalOptions="Center"
+                VerticalOptions="CenterAndExpand" />
+            <Entry 
+                x:Name="confirmPasswordEntry" 
+                IsPassword="True" />
+            <Button Text="Submit" Clicked="ToMainMenu"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
