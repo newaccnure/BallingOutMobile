@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BallingOutMobile.Services;
+using System;
 using Xamarin.Forms;
-using Entry = Microcharts.Entry;
-using SkiaSharp;
-using Microcharts.Forms;
-using Microcharts;
 
 namespace BallingOutMobile
 {
@@ -36,7 +29,21 @@ namespace BallingOutMobile
         }
         private async void ToMainMenu(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new MainMenuPage());
+            var email = emailEntry.Text;
+            var password = passwordEntry.Text;
+
+            var hasAccount = UserService.CheckUser(email, password);
+
+            if (hasAccount)
+            {
+                var user = UserService.GetUserById(UserService.GetUserIdByEmail(email));
+                Current_User.user = user;
+                await Navigation.PushModalAsync(new MainMenuPage());
+            }
+            else
+            {
+                await DisplayAlert("Error", "Check your personal information, please.", "OK");
+            }
         }
     }
 }

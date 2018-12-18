@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BallingOutMobile.Services;
 
 namespace BallingOutMobile
 {
@@ -16,5 +17,6 @@ namespace BallingOutMobile
         {
             InitializeComponent();
         }
+        
     }
 }

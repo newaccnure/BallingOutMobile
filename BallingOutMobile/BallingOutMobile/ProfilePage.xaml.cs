@@ -10,6 +10,7 @@ using SkiaSharp;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BallingOutMobile.Services;
 
 namespace BallingOutMobile
 {
@@ -52,6 +53,13 @@ namespace BallingOutMobile
                 PointMode = PointMode.Square,
                 PointSize = 18,
             };
+
+            Display();
+        }
+        private async void Display()
+        {
+            var user = Current_User.user;
+            await DisplayAlert("User ID", $"Your id: {user.Id}, your name: {user.Name}", "OK");
         }
         private void GenerateUserStats() {
             var startAccuracy = 0.7;
@@ -71,7 +79,9 @@ namespace BallingOutMobile
             var startColorGreen = startColor.Green;
 
             DateTime currentDay = DateTime.Now.AddDays(-10);
-
+            accuracyEntries = new List<Entry>();
+            averageSpeedEntries = new List<Entry>();
+            repsPerSecEntries = new List<Entry>();
             Random r = new Random();
             for (int i = 1; i <= 10; i++)
             {

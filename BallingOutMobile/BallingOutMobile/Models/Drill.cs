@@ -1,22 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 
 namespace BallingOutMobile.Models
 {
     public class Drill : INotifyPropertyChanged
     {
-        private bool isCompleted;
-        public bool IsCompleted {
-            get { return isCompleted; }
-            set {
-                isCompleted = value;
-                OnPropertyChanged("IsCompleted");
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsCompleted { get; set; }
 
         public int SecondsForExercise { get; set; }
+
+        public int DifficultyId { get; set; }
+
+        public int DrillId { get; set; }
 
         public string Name { get; set; }
 
@@ -24,10 +19,5 @@ namespace BallingOutMobile.Models
 
         public string VideoReference { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged(string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
 }

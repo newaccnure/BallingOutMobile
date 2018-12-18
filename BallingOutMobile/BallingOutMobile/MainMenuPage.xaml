@@ -5,10 +5,6 @@
             x:Class="BallingOutMobile.MainMenuPage">
     <TabbedPage.Children>
         <local:ProfilePage/>
-        <NavigationPage Title="Practice">
-            <x:Arguments>
-                <local:PracticePage/>
-            </x:Arguments>
-        </NavigationPage>
+        <local:PracticePage/>
     </TabbedPage.Children>
 </TabbedPage>

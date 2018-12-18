@@ -1,40 +1,26 @@
 ﻿using BallingOutMobile.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using BallingOutMobile.Services;
 
 namespace BallingOutMobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PracticePage : ContentPage
     {
-        public List<Drill> Drills { get; set; }
+        public ObservableCollection<Drill> Drills { get; set; }
 
         public PracticePage()
         {
             InitializeComponent();
-            Drills = new List<Drill>()
-            {
-                new Drill() {
-                    IsCompleted = true,
-                    Description = "This is your first drill.",
-                    Name = "First drill",
-                    SecondsForExercise = 30
-                },
-                new Drill() {
-                    IsCompleted = false,
-                    Description = "This is your second drill.",
-                    Name = "Second drill",
-                    SecondsForExercise = 40
-                },
-                new Drill() {
-                    IsCompleted = false,
-                    Description = "This is your third drill.",
-                    Name = "Third drill",
-                    SecondsForExercise = 50
-                },
-            };
+            Drills = new ObservableCollection<Drill>();
+            
             BindingContext = this;
 
         }
@@ -46,14 +32,21 @@ namespace BallingOutMobile
 
         private void StartButton_Clicked(object sender, EventArgs e)
         {
+            var user = Current_User.user;
+            List<Drill> drills = DrillService.GetFullTrainingProgramById(user.Id);
+            foreach (var drill in drills) {
+                Drills.Add(drill);
+            }
             (sender as Button).IsVisible = false;
             ListView listView = (ListView)FindByName("DrillListView");
             listView.IsVisible = true;
+
         }
 
-        private void DrillListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        private async void DrillListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-
+            if (e.SelectedItem != null)
+                await Navigation.PushModalAsync(new DrillPage((Drill)e.SelectedItem));
         }
     }
 }
