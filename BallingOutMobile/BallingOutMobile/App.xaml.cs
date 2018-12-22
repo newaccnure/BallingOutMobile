@@ -10,8 +10,9 @@ namespace BallingOutMobile
         public App()
         {
             InitializeComponent();
-
-            MainPage = new NavigationPage(new LoginPage());
+            var loginPage = new LoginPage();
+            NavigationPage.SetHasNavigationBar(loginPage, false);
+            MainPage = new NavigationPage(loginPage);
         }
 
         protected override void OnStart()

@@ -1,43 +1,42 @@
-﻿using System;
+﻿using BallingOutMobile.Services;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using BallingOutMobile.Services;
-using BallingOutMobile.Models;
-
 namespace BallingOutMobile
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SignUpPage : ContentPage
-	{
-		public SignUpPage ()
-		{
-			InitializeComponent ();
-		}
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SignUpPage : ContentPage
+    {
+        public bool IsLoading { get; set; }
+        public SignUpPage()
+        {
+            InitializeComponent();
+            BindingContext = this;
+        }
 
         private async void ToMainMenu(object sender, EventArgs e)
         {
+            IsLoading = true;
             var email = emailEntry.Text;
             var password = passwordEntry.Text;
+            var name = nameEntry.Text;
+            var confirmPassword = confirmPasswordEntry.Text;
+            
+            var user = await UserService.AddUser(name, email, password, confirmPassword, new List<int> { 1, 2, 3 });
 
-            var hasAccount = UserService.CheckUser(email, password);
-
-            if (hasAccount)
+            if (user.Id != 0)
             {
-                var user = UserService.GetUserById(UserService.GetUserIdByEmail(email));
-                await DisplayAlert("User ID", $"Your id: {user.Id}, your name: {user.Name}", "OK");
+                Current_User.user = user;
+                IsLoading = false;
                 await Navigation.PushModalAsync(new MainMenuPage());
             }
             else
             {
+                IsLoading = false;
                 await DisplayAlert("Error", "Check your personal information, please.", "OK");
             }
-            await Navigation.PushModalAsync(new NavigationPage(new MainMenuPage()));
         }
     }
 }

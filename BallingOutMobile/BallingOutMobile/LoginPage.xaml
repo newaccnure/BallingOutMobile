@@ -4,27 +4,35 @@
              xmlns:local="clr-namespace:BallingOutMobile"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="BallingOutMobile.LoginPage">
-
-    <StackLayout>
-        <Label 
+    <AbsoluteLayout>
+        <ActivityIndicator x:Name="Activity"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="#cbff49"
+                           AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.4, 0.4"/>
+        <StackLayout AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0.5, 0, 0.6, 1">
+            <Label 
             Text="Enter your email:" 
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
-        <Entry 
+            <Entry 
             x:Name="emailEntry" />
-        <Label 
+            <Label 
             Text="Enter your password:" 
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
-        <Entry 
+            <Entry 
             x:Name="passwordEntry" 
             IsPassword="True" />
-        <Label 
+            <Label 
             Text="Don't have an account yet?"
             TextColor="Blue"
             x:Name="toSignUpPageLabel"
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
-        <Button Text="Submit" Clicked="ToMainMenu"/>
-    </StackLayout>
+            <Button Text="Submit" Clicked="ToMainMenu"/>
+        </StackLayout>
+    </AbsoluteLayout>
 </ContentPage>

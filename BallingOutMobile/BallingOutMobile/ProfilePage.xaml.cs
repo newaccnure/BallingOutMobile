@@ -124,5 +124,25 @@ namespace BallingOutMobile
                 currentDay = currentDay.AddDays(1);
             }
         }
+        protected override bool OnBackButtonPressed()
+        {
+            //if (_canClose)
+            //{
+            //    ShowExitDialog();
+            //}
+            //return _canClose;
+            base.OnBackButtonPressed();
+            return true;
+        }
+        //private async void ShowExitDialog()
+        //{
+
+        //    var answer = await DisplayAlert("Exit", "Do you wan't to exit the App?", "Yes", "No");
+        //    if (answer) {
+        //        _canClose = false;
+        //        base.OnBackButtonPressed();
+        //    }
+        //}
+        //private bool _canClose = true;
     }
 }

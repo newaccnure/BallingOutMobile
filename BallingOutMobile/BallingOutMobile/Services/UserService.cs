@@ -2,13 +2,14 @@
 using RestSharp;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace BallingOutMobile.Services
 {
     public static class UserService
     {
         private static RestClient client = new RestClient(API_Connection.URL);
-        public static int AddUser(string name, string email, string password,
+        public static async Task<User> AddUser(string name, string email, string password,
             string checkPassword, List<int> practiceDays)
         {
             var request = new RestRequest("/api/User/addUser", Method.POST);
@@ -19,28 +20,28 @@ namespace BallingOutMobile.Services
             request.AddParameter("checkPassword", checkPassword);
             request.AddParameter("practiceDays", JsonConvert.SerializeObject(practiceDays));
 
-            IRestResponse<bool> response = client.Execute<bool>(request);
+            var response = await client.ExecuteTaskAsync<bool>(request);
 
             if (response.Data)
             {
-                var user = GetUserIdByEmail(email);
-
+                var userId = await GetUserIdByEmail(email);
+                var user = await GetUserById(userId);
                 return user;
             }
 
-            return -1;
+            return new User();
         }
 
-        public static bool CheckUser(string email, string password)
+        public static async Task<bool> CheckUser(string email, string password)
         {
             var request = new RestRequest("/api/User/checkUser", Method.POST);
 
             request.AddParameter("email", email);
             request.AddParameter("password", password);
+            
+            var res = await client.ExecuteTaskAsync<bool>(request);
 
-            IRestResponse<bool> response = client.Execute<bool>(request);
-
-            return response.Data;
+            return res.Data;
         }
 
         public static bool ChangeName(string email, string name)
@@ -58,24 +59,24 @@ namespace BallingOutMobile.Services
             return true;
         }
 
-        public static User GetUserById(int userId)
+        public static async Task<User> GetUserById(int userId)
         {
             var request = new RestRequest("/api/User/getUserById", Method.POST);
 
             request.AddParameter("userId", userId);
 
-            IRestResponse<User> response = client.Execute<User>(request);
+            var response = await client.ExecuteTaskAsync<User>(request);
 
             return response.Data;
         }
 
-        public static int GetUserIdByEmail(string email)
+        public static async Task<int> GetUserIdByEmail(string email)
         {
             var request = new RestRequest("/api/User/getUserIdByEmail", Method.POST);
 
             request.AddParameter("email", email);
 
-            IRestResponse<int> response = client.Execute<int>(request);
+            var response = await client.ExecuteTaskAsync<int>(request);
 
             return response.Data;
         }

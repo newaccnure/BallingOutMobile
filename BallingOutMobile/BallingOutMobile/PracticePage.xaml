@@ -3,15 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BallingOutMobile.PracticePage"
              Title="Practice">
-    <ContentPage.Resources>
-    </ContentPage.Resources>
-    <ContentPage.Content>
-        <StackLayout>
+    <AbsoluteLayout>
+        <ActivityIndicator x:Name="Activity"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="#cbff49"
+                           AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.4, 0.4"/>
+        <StackLayout AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0, 0, 1, 1">
             <Button 
                     x:Name="StartButton"
                     Text="Start practice"
                     Clicked="StartButton_Clicked"/>
-            <ListView 
+            <ListView
+                    HasUnevenRows="True"
                     x:Name="DrillListView"
                     ItemsSource="{Binding Drills}"
                     IsVisible="False"
@@ -40,5 +46,5 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-    </ContentPage.Content>
+    </AbsoluteLayout>
 </ContentPage>
