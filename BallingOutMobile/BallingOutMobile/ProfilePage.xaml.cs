@@ -11,6 +11,8 @@ using SkiaSharp;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BallingOutMobile.Services;
+using System.Collections.ObjectModel;
+using BallingOutMobile.Models;
 
 namespace BallingOutMobile
 {
@@ -25,7 +27,10 @@ namespace BallingOutMobile
         {
             InitializeComponent();
 
-            GenerateUserStats();
+            //GenerateUserStats();
+
+            GetUserStats();
+
 
             SpeedChart.Chart = new LineChart
             {
@@ -53,14 +58,44 @@ namespace BallingOutMobile
                 PointMode = PointMode.Square,
                 PointSize = 18,
             };
+            
+        }
 
-            Display();
+        private void GetUserStats() {
+            List<UserStats> userStats = ProfileService.GetUserStatsById(Current_User.user.Id);
+
+            var accEntries = userStats
+                .Select(x => new Entry(x.AverageAccuracy)
+                {
+                    Color = SKColor.Parse("#FF1166"),
+                    Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
+                });
+            foreach (var e in accEntries) {
+                accuracyEntries.Add(e);
+            }
+
+            var avgSpeedEntries = userStats
+                .Select(x => new Entry(x.AverageSpeed)
+                {
+                    Color = SKColor.Parse("#FF1166"),
+                    Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
+                });
+            foreach (var e in avgSpeedEntries) {
+                averageSpeedEntries.Add(e);
+            }
+
+            var avgRepsEntries = userStats
+                .Select(x => new Entry(x.AverageRepsPerSec)
+                {
+                    Color = SKColor.Parse("#FF1166"),
+                    Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
+                });
+            foreach (var e in avgRepsEntries) {
+                repsPerSecEntries.Add(e);
+            }
+            
         }
-        private async void Display()
-        {
-            var user = Current_User.user;
-            await DisplayAlert("User ID", $"Your id: {user.Id}, your name: {user.Name}", "OK");
-        }
+
         private void GenerateUserStats() {
             var startAccuracy = 0.7;
             var endAccuracy = 0.9;
@@ -124,25 +159,11 @@ namespace BallingOutMobile
                 currentDay = currentDay.AddDays(1);
             }
         }
+
         protected override bool OnBackButtonPressed()
         {
-            //if (_canClose)
-            //{
-            //    ShowExitDialog();
-            //}
-            //return _canClose;
             base.OnBackButtonPressed();
             return true;
         }
-        //private async void ShowExitDialog()
-        //{
-
-        //    var answer = await DisplayAlert("Exit", "Do you wan't to exit the App?", "Yes", "No");
-        //    if (answer) {
-        //        _canClose = false;
-        //        base.OnBackButtonPressed();
-        //    }
-        //}
-        //private bool _canClose = true;
     }
 }

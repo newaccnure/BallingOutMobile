@@ -9,6 +9,7 @@ namespace BallingOutMobile.Services
     public static class UserService
     {
         private static RestClient client = new RestClient(API_Connection.URL);
+
         public static async Task<User> AddUser(string name, string email, string password,
             string checkPassword, List<int> practiceDays)
         {
@@ -24,8 +25,7 @@ namespace BallingOutMobile.Services
 
             if (response.Data)
             {
-                var userId = await GetUserIdByEmail(email);
-                var user = await GetUserById(userId);
+                var user = await GetUserByEmail(email);
                 return user;
             }
 
@@ -59,24 +59,13 @@ namespace BallingOutMobile.Services
             return true;
         }
 
-        public static async Task<User> GetUserById(int userId)
+        public static async Task<User> GetUserByEmail(string email)
         {
-            var request = new RestRequest("/api/User/getUserById", Method.POST);
-
-            request.AddParameter("userId", userId);
-
-            var response = await client.ExecuteTaskAsync<User>(request);
-
-            return response.Data;
-        }
-
-        public static async Task<int> GetUserIdByEmail(string email)
-        {
-            var request = new RestRequest("/api/User/getUserIdByEmail", Method.POST);
+            var request = new RestRequest("/api/User/getUserByEmail", Method.POST);
 
             request.AddParameter("email", email);
 
-            var response = await client.ExecuteTaskAsync<int>(request);
+            var response = await client.ExecuteTaskAsync<User>(request);
 
             return response.Data;
         }

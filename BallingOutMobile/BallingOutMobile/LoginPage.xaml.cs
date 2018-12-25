@@ -25,11 +25,12 @@ namespace BallingOutMobile
             BindingContext = this;
         }
 
-        private async void ToSignUpPage(object sender, EventArgs e)
+        private void ToSignUpPage(object sender, EventArgs e)
         {
-            var signUpPage = new SignUpPage();
-            NavigationPage.SetHasNavigationBar(signUpPage, false);
-            await Navigation.PushModalAsync(signUpPage);
+            //var signUpPage = new SignUpPage();
+            //NavigationPage.SetHasNavigationBar(signUpPage, false);
+            //await Navigation.PushModalAsync(signUpPage);
+            App.Current.MainPage = new SignUpPage();
         }
 
         private async void ToMainMenu(object sender, EventArgs e)
@@ -43,8 +44,7 @@ namespace BallingOutMobile
 
             if (hasAccount)
             {
-                var userId = await UserService.GetUserIdByEmail(email);
-                var user = await UserService.GetUserById(userId);
+                var user = await UserService.GetUserByEmail(email);
                 Current_User.user = user;
                 IsLoading = false;
                 await Navigation.PushModalAsync(new MainMenuPage());

@@ -17,10 +17,10 @@ namespace BallingOutMobile
         public PracticePage()
         {
             InitializeComponent();
+
             Drills = new ObservableCollection<Drill>();
 
             BindingContext = this;
-
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -47,7 +47,7 @@ namespace BallingOutMobile
             else {
                 (sender as Button).IsVisible = false;
                 IsLoading = false;
-                await DisplayAlert("", "Today is not your practice day", "OK");
+                await DisplayAlert("", "Today is not your practice day.", "OK");
             }
 
 
@@ -56,8 +56,9 @@ namespace BallingOutMobile
         private async void DrillListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
-                await Navigation.PushModalAsync(new DrillPage((Drill)e.SelectedItem));
+                await Navigation.PushAsync(new DrillPage((Drill)e.SelectedItem));
         }
+
         protected override bool OnBackButtonPressed() { return true; }
     }
 }
