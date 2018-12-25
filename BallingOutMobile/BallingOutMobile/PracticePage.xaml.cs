@@ -49,8 +49,6 @@ namespace BallingOutMobile
                 IsLoading = false;
                 await DisplayAlert("", "Today is not your practice day.", "OK");
             }
-
-
         }
 
         private async void DrillListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

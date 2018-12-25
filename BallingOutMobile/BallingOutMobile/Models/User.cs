@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace BallingOutMobile.Models
 {
-    public class User
+    public class User : INotifyPropertyChanged
     {
         public int Id { get; set; }
 
@@ -15,5 +16,7 @@ namespace BallingOutMobile.Models
         public string Name { get; set; }
 
         public List<int> PracticeDays { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

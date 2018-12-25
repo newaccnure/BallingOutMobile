@@ -44,9 +44,16 @@ namespace BallingOutMobile.Services
             return res.Data;
         }
 
-        public static bool ChangeName(string email, string name)
+        public static async Task<bool> ChangeName(string email, string name)
         {
-            return true;
+            var request = new RestRequest("/api/User/changeName", Method.POST);
+
+            request.AddParameter("email", email);
+            request.AddParameter("name", name);
+
+            var res = await client.ExecuteTaskAsync<bool>(request);
+
+            return res.Data;
         }
 
         public static bool DeleteAccount(string email)

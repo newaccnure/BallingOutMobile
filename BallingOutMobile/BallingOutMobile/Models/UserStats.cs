@@ -8,9 +8,11 @@ namespace BallingOutMobile.Models
     public class UserStats
     {
         public float AverageSpeed { get; set; }
-        public float AverageRepsPerSec { get; set; }
-        public float AverageAccuracy { get; set; }
-        public DateTime PracticeDay { get; set; }
 
+        public float AverageRepsPerSec { get; set; }
+
+        public float AverageAccuracy { get; set; }
+
+        public DateTime PracticeDay { get; set; }
     }
 }

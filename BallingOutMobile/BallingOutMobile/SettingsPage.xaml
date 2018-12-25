@@ -4,9 +4,27 @@
              x:Class="BallingOutMobile.SettingsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout>
+                <Label 
+                    Text="Your name:" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" />
+                <StackLayout Orientation="Horizontal">
+                    <Entry 
+                        WidthRequest="100"
+                        Text="{Binding User.Name, Mode=TwoWay}"
+                        x:Name="nameEntry" 
+                        ReturnType="Done"/>
+                    <Button 
+                        BackgroundColor="Blue"
+                        Text="Save" 
+                        Clicked="SaveButton_Clicked"/>
+                </StackLayout>
+            </StackLayout>
+
+            <Button 
+                Text="Change password" 
+                Clicked="ChangePasswordButton_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
