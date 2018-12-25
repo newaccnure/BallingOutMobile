@@ -9,11 +9,11 @@
             <StackLayout>
                 <Label Text="Your profile is here!"/>
                 <Label Text="Speed chart"/>
-                <charts:ChartView x:Name="SpeedChart" HeightRequest="150"/>
+                <charts:ChartView x:Name="SpeedChart" HeightRequest="250"/>
                 <Label Text="Accuracy chart"/>
-                <charts:ChartView x:Name="AccuracyChart" HeightRequest="150"/>
+                <charts:ChartView x:Name="AccuracyChart" HeightRequest="250"/>
                 <Label Text="Repeatitions per sec chart"/>
-                <charts:ChartView x:Name="RepeatitionsChart" HeightRequest="150"/>
+                <charts:ChartView x:Name="RepetitionsChart" HeightRequest="250"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

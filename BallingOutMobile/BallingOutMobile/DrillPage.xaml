@@ -5,16 +5,39 @@
     <ContentPage.Content>
         <StackLayout>
 
-            <Label Text="{Binding Drill.Name}" FontSize="18" />
-            <Label Text="Description"/>
-            <Label Text="{Binding Drill.Description}" FontSize="18" />
-            <Label Text="Seconds for exercise:" />
+            <Label Text="{Binding Drill.Name}" FontSize="Micro" />
+            <Label Text="Description" FontSize="Medium"/>
+            <Label Text="{Binding Drill.Description}" FontSize="Micro" />
+            <Label Text="Seconds for exercise:" FontSize="Medium"/>
             <Label Text="{Binding Drill.SecondsForExercise}" />
-            
-            <Button x:Name="StartDrillButton" Text="Start" Clicked="StartDrill_Clicked"/>
-            <Label x:Name="TimeTextLabel" Text="Milliseconds left:" IsVisible="False"/>
-            <Label x:Name="TimeLabel" Text="{Binding CurrentTime}" IsVisible="False"/>
-            <Button x:Name="ViewResultButton" Text="View result" IsVisible="False"/>
+
+            <Button
+                x:Name="StartDrillButton" 
+                Text="Start" 
+                Clicked="StartDrill_Clicked">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Drill.IsCompleted}" Value="True">
+                        <Setter Property="IsVisible" Value="False"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Drill.IsCompleted}" Value="False">
+                        <Setter Property="IsVisible" Value="True"/>
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+
+            <Label 
+                x:Name="TimeTextLabel"
+                Text="Milliseconds left:" 
+                IsVisible="False"/>
+            <Label 
+                x:Name="TimeLabel" 
+                Text="{Binding CurrentTime}"
+                IsVisible="False"/>
+
+            <Button 
+                x:Name="ViewResultButton" 
+                Text="View result" 
+                IsVisible="{Binding Drill.IsCompleted}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

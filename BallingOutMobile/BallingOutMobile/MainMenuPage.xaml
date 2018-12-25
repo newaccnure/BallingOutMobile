@@ -4,13 +4,35 @@
              xmlns:local="clr-namespace:BallingOutMobile"
             x:Class="BallingOutMobile.MainMenuPage"
                   Title="MasterApp">
+    <MasterDetailPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="menuButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="BackgroundColor" Value="#87b5ff"/>
+                <Setter Property="WidthRequest" Value="100"/>
+            </Style>
+        </ResourceDictionary>
+    </MasterDetailPage.Resources>
     <MasterDetailPage.Master>
         <ContentPage Title="Master">
             <StackLayout HorizontalOptions="FillAndExpand"  BackgroundColor="#87b5ff" Padding="5,15,5,5">
-                <Button FontSize="Medium" HorizontalOptions="StartAndExpand" BackgroundColor="#87b5ff" Text="Profile" Clicked="ProfileButton_Clicked"/>
-                <Button FontSize="Medium" HorizontalOptions="StartAndExpand" BackgroundColor="#87b5ff" Text="Practice" Clicked="PracticeButton_Clicked"/>
-                <Button FontSize="Medium" HorizontalOptions="StartAndExpand" BackgroundColor="#87b5ff" Text="Settings" Clicked="SettingsButton_Clicked"/>
-                <Button FontSize="Medium" HorizontalOptions="StartAndExpand" BackgroundColor="#87b5ff" Text="Log out" Clicked="LogOutButton_Clicked"/>
+                <Button 
+                    Style="{StaticResource menuButtonStyle}"
+                    Text="Profile" 
+                    Clicked="ProfileButton_Clicked"/>
+                <Button 
+                    Style="{StaticResource menuButtonStyle}"
+                    Text="Practice" 
+                    Clicked="PracticeButton_Clicked"/>
+                <Button
+                    Style="{StaticResource menuButtonStyle}"
+                    Text="Settings" 
+                    Clicked="SettingsButton_Clicked"/>
+                <Button
+                    Style="{StaticResource menuButtonStyle}"
+                    Text="Log out" 
+                    Clicked="LogOutButton_Clicked"/>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>

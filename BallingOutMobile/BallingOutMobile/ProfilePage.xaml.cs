@@ -38,7 +38,7 @@ namespace BallingOutMobile
                 LineMode = LineMode.Straight,
                 LineSize = 8,
                 PointMode = PointMode.Square,
-                PointSize = 18,
+                PointSize = 18
             };
             AccuracyChart.Chart = new LineChart
             {
@@ -50,7 +50,7 @@ namespace BallingOutMobile
                 PointMode = PointMode.Square,
                 PointSize = 18,
             };
-            RepeatitionsChart.Chart = new LineChart
+            RepetitionsChart.Chart = new LineChart
             {
                 Entries = repsPerSecEntries,
                 LineMode = LineMode.Straight,
@@ -63,37 +63,55 @@ namespace BallingOutMobile
 
         private void GetUserStats() {
             List<UserStats> userStats = ProfileService.GetUserStatsById(Current_User.user.Id);
-
-            var accEntries = userStats
-                .Select(x => new Entry(x.AverageAccuracy)
+            if (userStats.Count > 0) {
+                var accEntries = userStats.Select(x => new Entry(x.AverageAccuracy)
                 {
                     Color = SKColor.Parse("#FF1166"),
                     Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
-                });
-            foreach (var e in accEntries) {
-                accuracyEntries.Add(e);
-            }
-
-            var avgSpeedEntries = userStats
-                .Select(x => new Entry(x.AverageSpeed)
+                }).ToList();
+                ChangeEntries(ref accEntries);
+                foreach (var e in accEntries)
                 {
-                    Color = SKColor.Parse("#FF1166"),
-                    Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
-                });
-            foreach (var e in avgSpeedEntries) {
-                averageSpeedEntries.Add(e);
-            }
+                    accuracyEntries.Add(e);
+                }
 
-            var avgRepsEntries = userStats
-                .Select(x => new Entry(x.AverageRepsPerSec)
+                var avgSpeedEntries = userStats
+                    .Select(x => new Entry(x.AverageSpeed)
+                    {
+                        Color = SKColor.Parse("#FF1166"),
+                        Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
+                    }).ToList();
+                ChangeEntries(ref avgSpeedEntries);
+                foreach (var e in avgSpeedEntries)
                 {
-                    Color = SKColor.Parse("#FF1166"),
-                    Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
-                });
-            foreach (var e in avgRepsEntries) {
-                repsPerSecEntries.Add(e);
+                    averageSpeedEntries.Add(e);
+                }
+
+                var avgRepsEntries = userStats
+                    .Select(x => new Entry(x.AverageRepsPerSec)
+                    {
+                        Color = SKColor.Parse("#FF1166"),
+                        Label = x.PracticeDay.Day.ToString() + "." + x.PracticeDay.Month
+                    }).ToList();
+                ChangeEntries(ref avgRepsEntries);
+                foreach (var e in avgRepsEntries)
+                {
+                    repsPerSecEntries.Add(e);
+                }
             }
+        }
+
+        private void ChangeEntries(ref List<Entry> entries) {
+            var newEntries = entries;
+            var maxEntry = newEntries.Where(x => x.Value == newEntries.Select(y => y.Value).Max()).First();
             
+            var maxIndex = newEntries.FindIndex(0, newEntries.Count, x => x.Value == maxEntry.Value);
+            entries[maxIndex] = new Entry(maxEntry.Value)
+            {
+                Color = SKColor.Parse("#ff19ae"),
+                ValueLabel = "Personal best at " + Math.Round(maxEntry.Value, 2),
+                Label = maxEntry.Label
+            };
         }
 
         private void GenerateUserStats() {

@@ -15,40 +15,38 @@ namespace BallingOutMobile
 	public partial class DrillPage : ContentPage
 	{
         public Drill Drill { get; set; }
-        private Timer timer;
-        public int CurrentTime { get; set; }
-		public DrillPage (Drill drill)
-		{
-			InitializeComponent ();
-            Drill = drill;
-            BindingContext = this;
-            timer = new Timer()
-            {
-                Interval = 10
-            };
-            timer.Elapsed += TimedEvent;
 
-		}
+        public bool DrillStarted { get; set; }
+
+        public int CurrentTime { get; set; }
+        
+		public DrillPage(Drill drill)
+		{
+			InitializeComponent();
+
+            Drill = drill;
+
+            BindingContext = this;
+        }
 
         private void StartDrill_Clicked(object sender, EventArgs e)
         {
-            CurrentTime = Drill.SecondsForExercise * 1000;
             TimeTextLabel.IsVisible = true;
             TimeLabel.IsVisible = true;
             StartDrillButton.IsVisible = false;
-            timer.Enabled = true;
-            
+
+            CurrentTime = 5000;
+            DisplayTime();
         }
-        private void TimedEvent(object sender, ElapsedEventArgs e)
+
+        private async void DisplayTime()
         {
-            CurrentTime-=10;
-            if (CurrentTime <= 0)
+            while (CurrentTime > 0)
             {
-                TimeLabel.IsVisible = false;
-                TimeTextLabel.IsVisible = false;
-                ViewResultButton.IsVisible = true;
-                timer.Stop();
+                await Task.Delay(100);
+                CurrentTime -= 100;
             }
+            ViewResultButton.IsVisible = true;
         }
     }
 }
