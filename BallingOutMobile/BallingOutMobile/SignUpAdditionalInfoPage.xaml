@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BallingOutMobile.SignUpAdditionalInfoPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="dayOfTheWeekButtonStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="BackgroundColor" Value="Gray"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ActivityIndicator x:Name="Activity"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Color="#cbff49"
+                           AbsoluteLayout.LayoutFlags="All"
+                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.4, 0.4"/>
+            <StackLayout 
+                x:Name="secondStage" 
+                AbsoluteLayout.LayoutFlags="All"
+                AbsoluteLayout.LayoutBounds="0.5, 0, 0.6, 1">
+                <Label 
+                    Text="Enter your name:" 
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" />
+                <Entry 
+                    x:Name="nameEntry" />
+
+                <Label Text="Choose days for your practice(at least 2):"/>
+
+                <StackLayout x:Name="daysOfTheWeek">
+                    <Button Text="Sun" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked" />
+                    <Button Text="Mon" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                    <Button Text="Tue" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                    <Button Text="Wed" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                    <Button Text="Thu" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                    <Button Text="Fri" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                    <Button Text="Sat" Style="dayOfTheWeekButtonStyle" Clicked="DayOfWeekButton_Clicked"/>
+                </StackLayout>
+
+                <Button WidthRequest="100" Text="Submit" Clicked="ToMainMenu"/>
+            </StackLayout>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

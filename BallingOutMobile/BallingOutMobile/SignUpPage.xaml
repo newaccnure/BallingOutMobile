@@ -3,21 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BallingOutMobile.SignUpPage"
              >
+
     <AbsoluteLayout>
-        <ActivityIndicator x:Name="Activity"
-                           IsRunning="{Binding IsLoading}"
-                           IsVisible="{Binding IsLoading}"
-                           Color="#cbff49"
-                           AbsoluteLayout.LayoutFlags="All"
-                           AbsoluteLayout.LayoutBounds="0.5, 0.5, 0.4, 0.4"/>
-        <StackLayout AbsoluteLayout.LayoutFlags="All"
+        <StackLayout x:Name="firstStage" AbsoluteLayout.LayoutFlags="All"
                            AbsoluteLayout.LayoutBounds="0.5, 0, 0.6, 1">
-            <Label 
-                Text="Enter your name:" 
-                HorizontalOptions="Center"
-                VerticalOptions="CenterAndExpand" />
-            <Entry 
-                x:Name="nameEntry" />
             <Label 
                 Text="Enter your email:" 
                 HorizontalOptions="Center"
@@ -38,7 +27,7 @@
             <Entry 
                 x:Name="confirmPasswordEntry" 
                 IsPassword="True" />
-            <Button Text="Submit" Clicked="ToMainMenu"/>
+            <Button Text="Next" Clicked="NextButton_Clicked"/>
         </StackLayout>
     </AbsoluteLayout>
 </ContentPage>

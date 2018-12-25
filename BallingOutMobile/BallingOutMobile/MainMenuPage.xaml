@@ -17,6 +17,7 @@
     <MasterDetailPage.Master>
         <ContentPage Title="Master">
             <StackLayout HorizontalOptions="FillAndExpand"  BackgroundColor="#87b5ff" Padding="5,15,5,5">
+                <Image Source="{local:ImageResource Source=BallingOutMobile.avatar.png}"/>
                 <Button 
                     Style="{StaticResource menuButtonStyle}"
                     Text="Profile" 

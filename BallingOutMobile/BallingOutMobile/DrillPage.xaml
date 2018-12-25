@@ -24,7 +24,7 @@
                     </DataTrigger>
                 </Button.Triggers>
             </Button>
-
+            
             <Label 
                 x:Name="TimeTextLabel"
                 Text="Milliseconds left:" 
@@ -38,6 +38,7 @@
                 x:Name="ViewResultButton" 
                 Text="View result" 
                 IsVisible="{Binding Drill.IsCompleted}"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

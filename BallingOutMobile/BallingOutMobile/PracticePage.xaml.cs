@@ -12,6 +12,7 @@ namespace BallingOutMobile
     public partial class PracticePage : ContentPage
     {
         public ObservableCollection<Drill> Drills { get; set; }
+
         public bool IsLoading { get; set; }
 
         public PracticePage()

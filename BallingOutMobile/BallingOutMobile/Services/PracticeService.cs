@@ -42,12 +42,15 @@ namespace BallingOutMobile.Services
             var request = new RestRequest("/api/Practice/addDrillToCompleted", Method.POST);
             //TODO
             Random r = new Random();
-            double averageSpeed = r.NextDouble();
+            double averageSpeed = r.NextDouble() * 10 + 10;
             double averageAccuracy = r.NextDouble() / 2 + 0.5;
-            double repeatitionsPerSecond = r.NextDouble();
+            double repeatitionsPerSecond = r.NextDouble() / 5 + 0.8;
 
             request.AddParameter("userId", userId);
             request.AddParameter("drillId", drillId);
+            request.AddParameter("averageSpeed", averageSpeed);
+            request.AddParameter("averageAccuracy", averageAccuracy);
+            request.AddParameter("repeatitionsPerSecond", repeatitionsPerSecond);
 
             var response = await client.ExecuteTaskAsync<bool>(request);
 

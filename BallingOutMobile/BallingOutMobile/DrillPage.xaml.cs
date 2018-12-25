@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using BallingOutMobile.Models;
-using System.Timers;
+using BallingOutMobile.Services;
 
 namespace BallingOutMobile
 {
@@ -46,7 +46,10 @@ namespace BallingOutMobile
                 await Task.Delay(100);
                 CurrentTime -= 100;
             }
-            ViewResultButton.IsVisible = true;
+
+            Drill.IsCompleted = await PracticeService.AddDrillToCompleted(Current_User.user.Id, Drill.DrillId);
+            TimeTextLabel.IsVisible = false;
+            TimeLabel.IsVisible = false;
         }
     }
 }

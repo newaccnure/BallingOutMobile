@@ -6,6 +6,6 @@ namespace BallingOutMobile.Services
 {
     public class API_Connection
     {
-        public static string URL = "http://0b06068a.ngrok.io";
+        public static string URL = "http://a641aa5f.ngrok.io";
     }
 }

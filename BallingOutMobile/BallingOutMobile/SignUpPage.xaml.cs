@@ -3,39 +3,35 @@ using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using BallingOutMobile.Models;
 
 namespace BallingOutMobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpPage : ContentPage
     {
-        public bool IsLoading { get; set; }
         public SignUpPage()
         {
             InitializeComponent();
+            
+            
             BindingContext = this;
         }
 
-        private async void ToMainMenu(object sender, EventArgs e)
+        private async void NextButton_Clicked(object sender, EventArgs e)
         {
-            IsLoading = true;
-            var email = emailEntry.Text;
-            var password = passwordEntry.Text;
-            var name = nameEntry.Text;
-            var confirmPassword = confirmPasswordEntry.Text;
-            
-            var user = await UserService.AddUser(name, email, password, confirmPassword, new List<int> { 1, 2, 3 });
-
-            if (user.Id != 0)
+            if (!String.IsNullOrWhiteSpace(emailEntry.Text) 
+                && !String.IsNullOrWhiteSpace(passwordEntry.Text)
+                && !String.IsNullOrWhiteSpace(confirmPasswordEntry.Text) 
+                && passwordEntry.Text == confirmPasswordEntry.Text)
             {
-                Current_User.user = user;
-                IsLoading = false;
-                await Navigation.PushModalAsync(new MainMenuPage());
+                await Navigation.PushAsync(new SignUpAdditionalInfoPage(new User() {
+                    Password = passwordEntry.Text,
+                    Email = emailEntry.Text
+                }));
             }
-            else
-            {
-                IsLoading = false;
-                await DisplayAlert("Error", "Check your personal information, please.", "OK");
+            else {
+                await DisplayAlert("", "Check your personal information, please.", "OK");
             }
         }
     }

@@ -1,11 +1,13 @@
 ﻿using BallingOutMobile.Services;
 using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace BallingOutMobile
 {
     public partial class LoginPage : ContentPage
     {
+        
         public bool IsLoading { get; set; }
 
         public LoginPage()
@@ -27,10 +29,7 @@ namespace BallingOutMobile
 
         private void ToSignUpPage(object sender, EventArgs e)
         {
-            //var signUpPage = new SignUpPage();
-            //NavigationPage.SetHasNavigationBar(signUpPage, false);
-            //await Navigation.PushModalAsync(signUpPage);
-            App.Current.MainPage = new SignUpPage();
+            App.Current.MainPage = new NavigationPage(new SignUpPage());
         }
 
         private async void ToMainMenu(object sender, EventArgs e)
@@ -47,7 +46,8 @@ namespace BallingOutMobile
                 var user = await UserService.GetUserByEmail(email);
                 Current_User.user = user;
                 IsLoading = false;
-                await Navigation.PushModalAsync(new MainMenuPage());
+                //await Navigation.PushModalAsync(new MainMenuPage());
+                App.Current.MainPage = new MainMenuPage();
             }
             else
             {
@@ -55,5 +55,6 @@ namespace BallingOutMobile
                 await DisplayAlert("Error", "Check your personal information, please.", "OK");
             }
         }
+        
     }
 }
