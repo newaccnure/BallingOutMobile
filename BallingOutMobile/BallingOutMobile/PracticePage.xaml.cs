@@ -27,6 +27,26 @@ namespace BallingOutMobile
             ManageDrills();
         }
 
+        protected async override void OnAppearing() {
+            base.OnAppearing();
+            IsLoading = true;
+            var res = await PracticeService.PracticeWasStarted(CurrentUser.User.Id);
+            if (res)
+            {
+                List<Drill> drills = await PracticeService.GetFullTrainingProgramById(CurrentUser.User.Id);
+                foreach (var drill in drills)
+                {
+                    Drills.Add(drill);
+                }
+                ListView listView = (ListView)FindByName("DrillListView");
+                listView.IsVisible = true;
+            }
+            else {
+                StartButton.IsVisible = true;
+            }
+            IsLoading = false;
+        }
+
         private void Button_Clicked(object sender, EventArgs e)
         {
 

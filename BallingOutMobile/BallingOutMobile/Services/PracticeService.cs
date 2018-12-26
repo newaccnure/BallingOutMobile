@@ -71,5 +71,17 @@ namespace BallingOutMobile.Services
 
             return response.Data;
         }
+
+        public static async Task<bool> PracticeWasStarted(int userId)
+        {
+
+            var request = new RestRequest("/api/Practice/practiceWasStarted", Method.POST);
+
+            request.AddParameter("userId", userId);
+
+            var response = await client.ExecuteTaskAsync<bool>(request);
+
+            return response.Data;
+        }
     }
 }
