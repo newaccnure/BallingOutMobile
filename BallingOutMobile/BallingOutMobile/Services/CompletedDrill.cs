@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BallingOutMobile.Models;
 
 namespace BallingOutMobile.Services
 {
-    public class API_Connection
+    public static class CompletedDrill
     {
-        public static string URL = "http://a74789c8.ngrok.io";
+        public static Drill Drill = new Drill();
     }
 }

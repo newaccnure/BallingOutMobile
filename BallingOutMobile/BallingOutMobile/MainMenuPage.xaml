@@ -10,14 +10,14 @@
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
                 <Setter Property="BackgroundColor" Value="#87b5ff"/>
-                <Setter Property="WidthRequest" Value="100"/>
+                <Setter Property="WidthRequest" Value="200"/>
             </Style>
         </ResourceDictionary>
     </MasterDetailPage.Resources>
     <MasterDetailPage.Master>
         <ContentPage Title="Master">
             <StackLayout HorizontalOptions="FillAndExpand"  BackgroundColor="#87b5ff" Padding="5,15,5,5">
-                <Image Source="{local:ImageResource Source=BallingOutMobile.avatar.png}"/>
+                <Image Source="{local:ImageResource Source=BallingOutMobile.Images.avatar.png}"/>
                 <Button 
                     Style="{StaticResource menuButtonStyle}"
                     Text="Profile" 

@@ -3,6 +3,7 @@ using BallingOutMobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -22,6 +23,8 @@ namespace BallingOutMobile
             Drills = new ObservableCollection<Drill>();
 
             BindingContext = this;
+
+            ManageDrills();
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -32,7 +35,7 @@ namespace BallingOutMobile
         private async void StartButton_Clicked(object sender, EventArgs e)
         {
             IsLoading = true;
-            var user = Current_User.user;
+            var user = CurrentUser.User;
             var hasPractice = await PracticeService.CheckDayOfPractice(user.Id);
             if (hasPractice) {
                 List<Drill> drills = await PracticeService.GetFullTrainingProgramById(user.Id);
@@ -52,12 +55,34 @@ namespace BallingOutMobile
             }
         }
 
+        private async void ManageDrills() {
+            while (true) {
+                await Task.Delay(3000);
+                CheckDrills();
+            }
+        }
+
+        private void CheckDrills() {
+            if (CompletedDrill.Drill.DrillId == 0) {
+                return;
+            }
+            if (Drills.Count == 0) {
+                return;
+            }
+            for (int i = 0; i < Drills.Count; i++)
+            {
+                if (!Drills[i].IsCompleted && Drills[i].DrillId == CompletedDrill.Drill.DrillId) {
+                    Drills[i].IsCompleted = CompletedDrill.Drill.IsCompleted;
+                    CompletedDrill.Drill = new Drill();
+                    return;
+                }
+            }
+        }
+
         private async void DrillListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem != null)
                 await Navigation.PushAsync(new DrillPage((Drill)e.SelectedItem));
         }
-
-        protected override bool OnBackButtonPressed() { return true; }
     }
 }

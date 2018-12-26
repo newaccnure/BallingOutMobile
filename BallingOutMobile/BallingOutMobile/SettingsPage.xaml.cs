@@ -18,7 +18,7 @@ namespace BallingOutMobile
 		public SettingsPage()
 		{
             InitializeComponent();
-            User = Current_User.user;
+            User = CurrentUser.User;
             BindingContext = this;
 		}
 
@@ -27,7 +27,7 @@ namespace BallingOutMobile
             var res = await UserService.ChangeName(User.Email, User.Name);
             if (res)
             {
-                Current_User.user = User;
+                CurrentUser.User = User;
             }
             else {
                 await DisplayAlert(":(", "Something went wrong", "Ok");

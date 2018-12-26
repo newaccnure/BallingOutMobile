@@ -5,8 +5,8 @@ using BallingOutMobile.Models;
 
 namespace BallingOutMobile.Services
 {
-    public static class Current_User
+    public static class CurrentUser
     {
-        public static User user;
+        public static User User = new User();
     }
 }

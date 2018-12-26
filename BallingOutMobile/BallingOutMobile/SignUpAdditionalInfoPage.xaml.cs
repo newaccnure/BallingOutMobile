@@ -60,7 +60,7 @@ namespace BallingOutMobile
 
                 if (user.Id != 0)
                 {
-                    Current_User.user = user;
+                    CurrentUser.User = user;
                     IsLoading = false;
                     //await Navigation.PushModalAsync(new MainMenuPage());
                     App.Current.MainPage = new MainMenuPage();

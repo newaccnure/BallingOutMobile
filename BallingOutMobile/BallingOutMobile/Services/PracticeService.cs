@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using RestSharp;
+using System.Globalization;
 
 namespace BallingOutMobile.Services
 {
@@ -46,13 +47,27 @@ namespace BallingOutMobile.Services
             double averageAccuracy = r.NextDouble() / 2 + 0.5;
             double repeatitionsPerSecond = r.NextDouble() / 5 + 0.8;
 
+            var culture = CultureInfo.CreateSpecificCulture("eu-ES");
             request.AddParameter("userId", userId);
             request.AddParameter("drillId", drillId);
-            request.AddParameter("averageSpeed", averageSpeed);
-            request.AddParameter("averageAccuracy", averageAccuracy);
-            request.AddParameter("repeatitionsPerSecond", repeatitionsPerSecond);
+            request.AddParameter("averageSpeed", averageSpeed.ToString("G", culture));
+            request.AddParameter("averageAccuracy", averageAccuracy.ToString("G", culture));
+            request.AddParameter("repeatitionsPerSecond", repeatitionsPerSecond.ToString("G", culture));
 
             var response = await client.ExecuteTaskAsync<bool>(request);
+
+            return response.Data;
+        }
+
+        public static async Task<DrillStats> GetDrillStatsById(int userId, int drillId)
+        {
+
+            var request = new RestRequest("/api/Practice/getDrillStatsById", Method.POST);
+
+            request.AddParameter("userId", userId);
+            request.AddParameter("drillId", drillId);
+
+            var response = await client.ExecuteTaskAsync<DrillStats>(request);
 
             return response.Data;
         }

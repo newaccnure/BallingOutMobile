@@ -48,7 +48,7 @@ namespace BallingOutMobile
 
         private void LogOutButton_Clicked(object sender, EventArgs e)
         {
-            Current_User.user = new Models.User();
+            CurrentUser.User = new Models.User();
             App.Current.MainPage = new LoginPage();
         }
     }
