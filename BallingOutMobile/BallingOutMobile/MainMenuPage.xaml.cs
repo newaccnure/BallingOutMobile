@@ -26,6 +26,42 @@ namespace BallingOutMobile
             SettingsPage = new SettingsPage();
             Detail = new NavigationPage(ProfilePage);
             IsPresented = false;
+
+            TapGestureRecognizer tapGesture = new TapGestureRecognizer
+            {
+                NumberOfTapsRequired = 1
+            };
+
+            tapGesture.Tapped += ProfileButton_Clicked;
+
+            Profile.GestureRecognizers.Add(tapGesture);
+
+            tapGesture = new TapGestureRecognizer
+            {
+                NumberOfTapsRequired = 1
+            };
+
+            tapGesture.Tapped += PracticeButton_Clicked;
+
+            Practice.GestureRecognizers.Add(tapGesture);
+
+            tapGesture = new TapGestureRecognizer
+            {
+                NumberOfTapsRequired = 1
+            };
+
+            tapGesture.Tapped += SettingsButton_Clicked;
+
+            Settings.GestureRecognizers.Add(tapGesture);
+
+            tapGesture = new TapGestureRecognizer
+            {
+                NumberOfTapsRequired = 1
+            };
+
+            tapGesture.Tapped += LogOutButton_Clicked;
+
+            Logout.GestureRecognizers.Add(tapGesture);
         }
 
         private void ProfileButton_Clicked(object sender, EventArgs e)

@@ -6,34 +6,42 @@
                   Title="MasterApp">
     <MasterDetailPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="menuButtonStyle" TargetType="Button">
+            <Style x:Key="menuLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
                 <Setter Property="BackgroundColor" Value="#87b5ff"/>
                 <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="XAlign" Value="Start"/>
             </Style>
         </ResourceDictionary>
     </MasterDetailPage.Resources>
     <MasterDetailPage.Master>
         <ContentPage Title="Master">
-            <StackLayout HorizontalOptions="FillAndExpand"  BackgroundColor="#87b5ff" Padding="5,15,5,5">
-                <Image Source="{local:ImageResource Source=BallingOutMobile.Images.avatar.png}"/>
-                <Button 
-                    Style="{StaticResource menuButtonStyle}"
-                    Text="Profile" 
-                    Clicked="ProfileButton_Clicked"/>
-                <Button 
-                    Style="{StaticResource menuButtonStyle}"
-                    Text="Practice" 
-                    Clicked="PracticeButton_Clicked"/>
-                <Button
-                    Style="{StaticResource menuButtonStyle}"
-                    Text="Settings" 
-                    Clicked="SettingsButton_Clicked"/>
-                <Button
-                    Style="{StaticResource menuButtonStyle}"
-                    Text="Log out" 
-                    Clicked="LogOutButton_Clicked"/>
+            <StackLayout HorizontalOptions="FillAndExpand" BackgroundColor="#87b5ff" Padding="5,15,5,5">
+                <StackLayout x:Name="Profile" Orientation="Horizontal">
+                    <Image Source="{local:ImageResource Source=BallingOutMobile.Images.avatar.png}"/>
+                    <Label 
+                        Style="{StaticResource menuLabelStyle}"
+                        Text="Profile"/>
+                </StackLayout>
+                <StackLayout x:Name="Practice" Orientation="Horizontal">
+                    <Image Source="{local:ImageResource Source=BallingOutMobile.Images.weights.png}"/>
+                    <Label 
+                        Style="{StaticResource menuLabelStyle}"
+                        Text="Practice"/>
+                </StackLayout>
+                <StackLayout x:Name="Settings" Orientation="Horizontal">
+                    <Image Source="{local:ImageResource Source=BallingOutMobile.Images.settings.png}"/>
+                    <Label
+                        Style="{StaticResource menuLabelStyle}"
+                        Text="Settings"/>
+                </StackLayout>
+                <StackLayout x:Name="Logout" Orientation="Horizontal">
+                    <Image Source="{local:ImageResource Source=BallingOutMobile.Images.logout.png}"/>
+                    <Label
+                        Style="{StaticResource menuLabelStyle}"
+                        Text="Log out"/>
+                </StackLayout>
             </StackLayout>
         </ContentPage>
     </MasterDetailPage.Master>
