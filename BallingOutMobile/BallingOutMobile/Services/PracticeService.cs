@@ -41,22 +41,29 @@ namespace BallingOutMobile.Services
         {
 
             var request = new RestRequest("/api/Practice/addDrillToCompleted", Method.POST);
-            //TODO
-            Random r = new Random();
-            double averageSpeed = r.NextDouble() * 10 + 10;
-            double averageAccuracy = r.NextDouble() / 2 + 0.5;
-            double repeatitionsPerSecond = r.NextDouble() / 5 + 0.8;
 
-            var culture = CultureInfo.CreateSpecificCulture("eu-ES");
             request.AddParameter("userId", userId);
             request.AddParameter("drillId", drillId);
-            request.AddParameter("averageSpeed", averageSpeed.ToString("G", culture));
-            request.AddParameter("averageAccuracy", averageAccuracy.ToString("G", culture));
-            request.AddParameter("repeatitionsPerSecond", repeatitionsPerSecond.ToString("G", culture));
+            request.AddParameter("averageSpeed", 12);
+            request.AddParameter("averageAccuracy", 12);
+            request.AddParameter("repeatitionsPerSecond", 12);
 
             var response = await client.ExecuteTaskAsync<bool>(request);
 
             return response.Data;
+        }
+
+        public static async Task<IRestResponse<bool>> StartDrillPractice(int userId, int drillId)
+        {
+
+            var request = new RestRequest("/api/Practice/startDrillPractice", Method.POST);
+            
+            request.AddParameter("userId", userId);
+            request.AddParameter("drillId", drillId);
+
+            var response = await client.ExecuteTaskAsync<bool>(request);
+
+            return response;
         }
 
         public static async Task<DrillStats> GetDrillStatsById(int userId, int drillId)

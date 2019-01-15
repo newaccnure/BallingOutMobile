@@ -62,6 +62,10 @@ namespace BallingOutMobile
         }
 
         private void GetUserStats() {
+            accuracyEntries = new List<Entry>();
+            averageSpeedEntries = new List<Entry>();
+            repsPerSecEntries = new List<Entry>();
+
             List<UserStats> userStats = ProfileService.GetUserStatsById(CurrentUser.User.Id);
             if (userStats.Count > 0) {
                 var accEntries = userStats.Select(x => new Entry(x.AverageAccuracy)

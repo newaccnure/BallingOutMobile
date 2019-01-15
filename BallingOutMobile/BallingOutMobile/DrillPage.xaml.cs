@@ -45,19 +45,20 @@ namespace BallingOutMobile
 
         private async void DisplayTime()
         {
+            //var res = await PracticeService.StartDrillPractice(CurrentUser.User.Id, Drill.DrillId);
+            var res = PracticeService.StartDrillPractice(CurrentUser.User.Id, Drill.DrillId);
+
             while (CurrentTime > 0)
             {
                 await Task.Delay(100);
                 CurrentTime -= 100;
             }
-
-            var res = await PracticeService.AddDrillToCompleted(CurrentUser.User.Id, Drill.DrillId);
-            if (res) {
-                Drill.IsCompleted = true;
-                CompletedDrill.Drill = Drill;
-                TimeTextLabel.IsVisible = false;
-                TimeLabel.IsVisible = false;
-            }
+            await Task.Delay(5000);
+ 
+            Drill.IsCompleted = true;
+            CompletedDrill.Drill = Drill;
+            TimeTextLabel.IsVisible = false;
+            TimeLabel.IsVisible = false;
         }
 
         private async void ViewResultButton_Clicked(object sender, EventArgs e)

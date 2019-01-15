@@ -10,13 +10,11 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Entry WidthRequest="150" HeightRequest="50"/>
-            
-            <Label Text="{Binding Drill.Name}" FontSize="Micro" />
+            <Label Text="{Binding Drill.Name}" FontSize="Large" />
             <Label Text="Description" FontSize="Medium"/>
-            <Label Text="{Binding Drill.Description}" FontSize="Micro" />
-            <Label Text="Seconds for exercise:" FontSize="Medium"/>
-            <Label Text="{Binding Drill.SecondsForExercise}" />
+            <Label Text="{Binding Drill.Description}" FontSize="Medium" />
+            <Label Text="Seconds for exercise:" FontSize="Large"/>
+            <Label Text="{Binding Drill.SecondsForExercise}" FontSize="Large"/>
 
             <Button
                 x:Name="StartDrillButton" 
@@ -34,7 +32,7 @@
             
             <Label 
                 x:Name="TimeTextLabel"
-                Text="Milliseconds left:" 
+                Text="Seconds left:" 
                 IsVisible="False"/>
             <Label 
                 x:Name="TimeLabel" 

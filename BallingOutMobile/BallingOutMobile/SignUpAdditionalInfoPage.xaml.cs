@@ -33,20 +33,21 @@ namespace BallingOutMobile
             keyValuePairs.Add("Thu", 4);
             keyValuePairs.Add("Fri", 5);
             keyValuePairs.Add("Sat", 6);
+            BindingContext = this;
         }
         private void DayOfWeekButton_Clicked(object sender, EventArgs e)
         {
             Button b = (sender as Button);
             Color c = b.BackgroundColor;
-            if (c != Color.Gray)
-            {
-                chosenDaysOfTheWeek.Add(keyValuePairs[b.Text]);
-                b.BackgroundColor = Color.LightGreen;
-            }
-            else
+            if (c == Color.LightGreen)
             {
                 chosenDaysOfTheWeek.Remove(keyValuePairs[b.Text]);
                 b.BackgroundColor = Color.Gray;
+            }
+            else
+            {
+                chosenDaysOfTheWeek.Add(keyValuePairs[b.Text]);
+                b.BackgroundColor = Color.LightGreen;
             }
         }
         private async void ToMainMenu(object sender, EventArgs e)

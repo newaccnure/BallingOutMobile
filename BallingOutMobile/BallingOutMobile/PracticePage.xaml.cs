@@ -24,11 +24,11 @@ namespace BallingOutMobile
 
             BindingContext = this;
 
+            PracticeWasStarted();
             ManageDrills();
         }
 
-        protected async override void OnAppearing() {
-            base.OnAppearing();
+        private async void PracticeWasStarted() {
             IsLoading = true;
             var res = await PracticeService.PracticeWasStarted(CurrentUser.User.Id);
             if (res)
@@ -41,10 +41,12 @@ namespace BallingOutMobile
                 ListView listView = (ListView)FindByName("DrillListView");
                 listView.IsVisible = true;
             }
-            else {
+            else
+            {
                 StartButton.IsVisible = true;
             }
             IsLoading = false;
+
         }
 
         private void Button_Clicked(object sender, EventArgs e)
